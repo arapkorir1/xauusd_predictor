@@ -1,0 +1,14 @@
+project_name: "xauusd_volatility_predictor"
+
+data:
+  # GC=F is the Yahoo Finance ticker for Gold Futures, the closest liquid surrogate to spot XAU/USD
+  ticker: "GC=F"
+  start_date: "2015-01-01"
+  end_date: "2026-07-01"
+  raw_data_path: "data/raw/raw_gold_data.parquet"
+  processed_data_path: "data/processed/features_gold.parquet"
+  
+model:
+  target: "volatility_regime"
+  test_size: 0.2
+  random_state: 42
