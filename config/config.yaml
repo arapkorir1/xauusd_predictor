@@ -9,6 +9,24 @@ data:
   processed_data_path: "data/processed/features_gold.parquet"
   
 model:
-  target: "volatility_regime"
+  #target: "volatility_regime"
+  #test_size: 0.2
+  #random_state: 42
+  target: "target"
   test_size: 0.2
   random_state: 42
+  features:
+    - "log_return"
+    - "volatility_5d"
+    - "volatility_21d"
+    - "atr_ratio"
+    - "rsi_14d"
+    - "volume_ratio"
+  model_save_path: "models/xgboost_regime_model.joblib"
+  metrics_save_path: "models/metrics.json"
+  hyperparameters:
+    n_estimators: 100
+    max_depth: 4
+    learning_rate: 0.05
+    subsample: 0.8
+    eval_metric: "logloss"
