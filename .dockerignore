@@ -1,0 +1,9 @@
+# .dockerignore
+venv/
+.git/
+__pycache__/
+*.pyc
+data/raw/*
+data/processed/*
+tests/
+.github/
