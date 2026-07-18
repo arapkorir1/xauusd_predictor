@@ -1,0 +1,32 @@
+name: Continuous Integration Pipeline
+
+# Trigger this workflow on every push or pull request targeting the main branch
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  continuous-testing:
+    # Run on a clean virtual machine hosted by GitHub
+    runs-edge: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python Runtime
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip' # Automatically caches downloaded wheels for faster subsequent runs
+
+    - name: Install System and Python Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Run Automated Test Matrix via Pytest
+      run: |
+        pytest
